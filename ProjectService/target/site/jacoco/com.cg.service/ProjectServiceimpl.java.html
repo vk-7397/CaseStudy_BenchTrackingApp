@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>ProjectServiceimpl.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">ProjectService</a> &gt; <a href="index.source.html" class="el_package">com.cg.service</a> &gt; <span class="el_source">ProjectServiceimpl.java</span></div><h1>ProjectServiceimpl.java</h1><pre class="source lang-java linenums">package com.cg.service;
+
+import java.util.List;
+import java.util.Optional;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.cg.exception.ProjectDataAlreadyExistsException;
+import com.cg.exception.EmployeeIdNotFound;
+import com.cg.model.Project;
+import com.cg.repository.ProjectRepository;
+
+
+
+@Service
+public class ProjectServiceimpl implements ProjectService {
+	private ProjectRepository proRepo;
+	
+	@Autowired
+	public ProjectServiceimpl(ProjectRepository proRepo) {
+<span class="fc" id="L22">		super();</span>
+<span class="fc" id="L23">		this.proRepo = proRepo;</span>
+<span class="fc" id="L24">	}</span>
+		//@Autowired
+		//private CaseStudyRepository cseRepo;
+		
+		
+		@Override
+		public  Project createProjectData(Project pro) throws ProjectDataAlreadyExistsException {
+			 //TODO Auto-generated method stub
+			//System.out.println(cseRepo.findById(csy.getEmpID()).get());
+<span class="pc bpc" id="L33" title="1 of 2 branches missed.">			if(proRepo.existsById(pro.getEmpID()))</span>
+	{
+<span class="nc" id="L35">			throw new ProjectDataAlreadyExistsException();</span>
+		}
+			
+			
+<span class="fc" id="L39">			Project savedDept = proRepo.save(pro);</span>
+<span class="fc" id="L40">			return savedDept;</span>
+		}
+
+		@Override
+		public Project updateProjectData(Project pro) throws EmployeeIdNotFound  {
+			// TODO Auto-generated method stub
+<span class="nc" id="L46">			Optional&lt;Project&gt; proDb = this.proRepo.findById(pro.getEmpID());</span>
+
+<span class="nc bnc" id="L48" title="All 2 branches missed.">	        if (proDb.isPresent()) {</span>
+<span class="nc" id="L49">	        	Project proUpdate = proDb.get();</span>
+<span class="nc" id="L50">	            proUpdate.setEmpID(pro.getEmpID());</span>
+<span class="nc" id="L51">	            proUpdate.setProjectname(pro.getProjectname());</span>
+<span class="nc" id="L52">	            proUpdate.setProjectmanagername(pro.getProjectmanagername());</span>
+<span class="nc" id="L53">	            proUpdate.setProjectclientname(pro.getProjectclientname());</span>
+	           
+<span class="nc" id="L55">	            proRepo.save(proUpdate);</span>
+<span class="nc" id="L56">	            return proUpdate;</span>
+	        }
+	        else
+	        {
+<span class="nc" id="L60">	        	throw new EmployeeIdNotFound();</span>
+	        }
+	    }
+		
+
+		@Override
+		public List&lt;Project&gt; getAllProjectData() {
+			// TODO Auto-generated method stub
+<span class="fc" id="L68">			return (List&lt;Project&gt;) proRepo.findAll();</span>
+		}
+
+		@Override
+		public Project getProjectDataById(int empID)throws EmployeeIdNotFound {
+<span class="nc" id="L73">			Optional&lt;Project&gt; proDb = this.proRepo.findById(empID);</span>
+
+<span class="nc bnc" id="L75" title="All 2 branches missed.">	        if (proDb.isPresent()) {</span>
+	        	
+<span class="nc" id="L77">	            return proDb.get();</span>
+	        } 
+	        else
+	        {
+<span class="nc" id="L81">	        	throw new  EmployeeIdNotFound();</span>
+	        }
+		}
+
+		@Override
+		public void deleteProjectDataById(int empID)throws EmployeeIdNotFound {
+			// TODO Auto-generated method stub
+<span class="nc" id="L88">			Optional&lt;Project&gt; csyDb = this.proRepo.findById(empID);</span>
+
+<span class="nc bnc" id="L90" title="All 2 branches missed.">	        if (csyDb.isPresent()) {</span>
+	        	
+<span class="nc" id="L92">	            this.proRepo.delete(csyDb.get());</span>
+<span class="nc" id="L93">	        } </span>
+	        else
+	        {
+<span class="nc" id="L96">	        	throw new EmployeeIdNotFound();</span>
+	        }
+<span class="nc" id="L98">		}</span>
+
+
+	
+
+
+		
+		}
+
+	
+
+   
+
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.6.202009150832</span></div></body></html>

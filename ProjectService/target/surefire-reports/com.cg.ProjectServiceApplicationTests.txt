@@ -1,0 +1,4 @@
+-------------------------------------------------------------------------------
+Test set: com.cg.ProjectServiceApplicationTests
+-------------------------------------------------------------------------------
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 49.32 s - in com.cg.ProjectServiceApplicationTests

@@ -1,0 +1,8 @@
+GROUP,PACKAGE,CLASS,INSTRUCTION_MISSED,INSTRUCTION_COVERED,BRANCH_MISSED,BRANCH_COVERED,LINE_MISSED,LINE_COVERED,COMPLEXITY_MISSED,COMPLEXITY_COVERED,METHOD_MISSED,METHOD_COVERED
+ProjectService,com.cg.model,Project,48,24,0,0,12,10,7,4,7,4
+ProjectService,com.cg.service,ProjectServiceimpl,83,25,7,1,21,7,7,3,3,3
+ProjectService,com.cg.exception,ProjectDataAlreadyExistsException,7,0,0,0,4,0,2,0,2,0
+ProjectService,com.cg.exception,EmployeeIdNotFound,7,0,0,0,4,0,2,0,2,0
+ProjectService,com.cg.exception,GlobalExceptionHandler,14,3,0,0,2,1,2,1,2,1
+ProjectService,com.cg,ProjectServiceApplication,5,3,0,0,2,1,1,1,1,1
+ProjectService,com.cg.contoller,ProjectController,36,3,0,0,7,1,5,1,5,1
