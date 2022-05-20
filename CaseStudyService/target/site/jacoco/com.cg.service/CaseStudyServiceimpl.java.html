@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>CaseStudyServiceimpl.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">CaseStudyService</a> &gt; <a href="index.source.html" class="el_package">com.cg.service</a> &gt; <span class="el_source">CaseStudyServiceimpl.java</span></div><h1>CaseStudyServiceimpl.java</h1><pre class="source lang-java linenums">package com.cg.service;
+
+import java.util.List;
+import java.util.Optional;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.cg.exception.CaseStudyDataAlreadyExistsException;
+import com.cg.exception.EmployeeIdNotFound;
+
+import com.cg.model.CaseStudy;
+
+import com.cg.repository.CaseStudyRepository;
+
+@Service
+public class CaseStudyServiceimpl implements CaseStudyService {
+	private CaseStudyRepository cseRepo;
+	
+	@Autowired
+	public CaseStudyServiceimpl(CaseStudyRepository cseRepo) {
+<span class="nc" id="L22">		super();</span>
+<span class="nc" id="L23">		this.cseRepo = cseRepo;</span>
+<span class="nc" id="L24">	}</span>
+		//@Autowired
+		//private CaseStudyRepository cseRepo;
+		
+		
+		@Override
+		public  CaseStudy createCaseStudyData(CaseStudy csy) throws CaseStudyDataAlreadyExistsException {
+			 //TODO Auto-generated method stub
+			//System.out.println(cseRepo.findById(csy.getEmpID()).get());
+<span class="nc bnc" id="L33" title="All 2 branches missed.">			if(cseRepo.existsById(csy.getEmpID()))</span>
+	{
+<span class="nc" id="L35">			throw new CaseStudyDataAlreadyExistsException();</span>
+		}
+			
+			
+<span class="nc" id="L39">			CaseStudy savedDept = cseRepo.save(csy);</span>
+<span class="nc" id="L40">			return savedDept;</span>
+		}
+
+		@Override
+		public CaseStudy updateCaseStudyData(CaseStudy csy) throws EmployeeIdNotFound  {
+			// TODO Auto-generated method stub
+<span class="nc" id="L46">			Optional&lt;CaseStudy&gt; csyDb = this.cseRepo.findById(csy.getEmpID());</span>
+
+<span class="nc bnc" id="L48" title="All 2 branches missed.">	        if (csyDb.isPresent()) {</span>
+<span class="nc" id="L49">	        	CaseStudy csyUpdate = csyDb.get();</span>
+<span class="nc" id="L50">	            csyUpdate.setEmpID(csy.getEmpID());</span>
+<span class="nc" id="L51">	            csyUpdate.setArchitectassigned(csy.getArchitectassigned());</span>
+<span class="nc" id="L52">	            csyUpdate.setScore(csy.getScore());</span>
+<span class="nc" id="L53">	            csyUpdate.setCasestudyevaulationstatus(csy.getCasestudyevaulationstatus());</span>
+	           
+<span class="nc" id="L55">	            cseRepo.save(csyUpdate);</span>
+<span class="nc" id="L56">	            return csyUpdate;</span>
+	        }
+	        else
+	        {
+<span class="nc" id="L60">	        	throw new EmployeeIdNotFound();</span>
+	        }
+	    }
+		
+
+		@Override
+		public List&lt;CaseStudy&gt; getAllCaseStudyData() {
+			// TODO Auto-generated method stub
+<span class="nc" id="L68">			return (List&lt;CaseStudy&gt;) cseRepo.findAll();</span>
+		}
+
+		@Override
+		public CaseStudy getCaseStudyDataById(int empID)throws EmployeeIdNotFound {
+<span class="nc" id="L73">			Optional&lt;CaseStudy&gt; csyDb = this.cseRepo.findById(empID);</span>
+
+<span class="nc bnc" id="L75" title="All 2 branches missed.">	        if (csyDb.isPresent()) {</span>
+	        	
+<span class="nc" id="L77">	            return csyDb.get();</span>
+	        } 
+	        else
+	        {
+<span class="nc" id="L81">	        	throw new  EmployeeIdNotFound();</span>
+	        }
+		}
+
+		@Override
+		public void deleteCaseStudyDataById(int empID)throws EmployeeIdNotFound {
+			// TODO Auto-generated method stub
+<span class="nc" id="L88">			Optional&lt;CaseStudy&gt; csyDb = this.cseRepo.findById(empID);</span>
+
+<span class="nc bnc" id="L90" title="All 2 branches missed.">	        if (csyDb.isPresent()) {</span>
+	        	
+<span class="nc" id="L92">	            this.cseRepo.delete(csyDb.get());</span>
+<span class="nc" id="L93">	        } </span>
+	        else
+	        {
+<span class="nc" id="L96">	        	throw new EmployeeIdNotFound();</span>
+	        }
+<span class="nc" id="L98">		}</span>
+
+	}
+
+   
+
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.8.202204050719</span></div></body></html>

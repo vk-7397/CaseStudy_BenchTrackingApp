@@ -1,0 +1,8 @@
+GROUP,PACKAGE,CLASS,INSTRUCTION_MISSED,INSTRUCTION_COVERED,BRANCH_MISSED,BRANCH_COVERED,LINE_MISSED,LINE_COVERED,COMPLEXITY_MISSED,COMPLEXITY_COVERED,METHOD_MISSED,METHOD_COVERED
+CaseStudyService,com.cg.model,CaseStudy,72,0,0,0,22,0,11,0,11,0
+CaseStudyService,com.cg.service,CaseStudyServiceimpl,108,0,8,0,28,0,10,0,6,0
+CaseStudyService,com.cg.exception,CaseStudyDataAlreadyExistsException,7,0,0,0,4,0,2,0,2,0
+CaseStudyService,com.cg.exception,EmployeeIdNotFound,7,0,0,0,4,0,2,0,2,0
+CaseStudyService,com.cg.exception,GlobalExceptionHandler,17,0,0,0,3,0,3,0,3,0
+CaseStudyService,com.cg,CaseStudyServiceApplication,8,0,0,0,3,0,2,0,2,0
+CaseStudyService,com.cg.contoller,CaseStudyController,39,0,0,0,8,0,6,0,6,0
